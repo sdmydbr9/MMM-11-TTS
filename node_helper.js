@@ -1,3 +1,4 @@
+const NodeHelper = require("node_helper");
 const { spawn } = require("child_process");
 
 module.exports = NodeHelper.create({
