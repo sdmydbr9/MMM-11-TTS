@@ -8,6 +8,12 @@ module.exports = NodeHelper.create({
     console.log("[MMM-11-TTS] Initializing node helper for: " + this.name);
   },
 
+  socketNotificationReceived: function(notification, payload) {
+    if (notification === "TTS_SAY") {
+      this.getTTS(payload, this.sendResponse.bind(this));
+    }
+  },
+
   getTTS: function(payload, response) {
     var self = this;
     var options = {
@@ -25,30 +31,30 @@ module.exports = NodeHelper.create({
       })
     };
 
-    request(options, function(error, response, body) {
+    request(options, function(error, apiResponse, body) {
       if (error) {
         console.log("[MMM-11-TTS] Error: " + error);
-        response.send("ERROR");
+        response("ERROR");
         return;
       }
 
-      if (response.statusCode === 200) {
+      if (apiResponse.statusCode === 200) {
         self.playTTS(payload, response, body);
       } else {
-        console.log("[MMM-11-TTS] API error: " + response.statusCode);
-        response.send("ERROR");
+        console.log("[MMM-11-TTS] API error: " + apiResponse.statusCode);
+        response("ERROR");
       }
     });
   },
 
   playTTS: function(payload, response, buffer) {
-    var filename = this.tmpFile + "/" + payload.uid + ".mp3";
+    var filename = this.path + "/tmp/" + payload.uid + ".mp3";
     var self = this;
 
     fs.writeFile(filename, buffer, function(error) {
       if (error) {
         console.log("[MMM-11-TTS] Error: " + error);
-        response.send("ERROR");
+        response("ERROR");
         return;
       }
 
@@ -58,23 +64,7 @@ module.exports = NodeHelper.create({
         type: "mp3"
       });
 
-      response.send("OK");
+      response("OK");
     });
-  },
-
-  socketNotificationReceived: function(notification, payload) {
-    if (notification === "TTS_END") {
-      this.sendNotification("TTS_SAY_ENDING", payload);
-
-      // Play the audio as soon as it's received
-      var playCommand = "aplay " + payload;
-      exec(playCommand, function(error, stdout, stderr) {
-        if (error) {
-          console.error(error);
-        }
-      });
-    } else if (notification === "TTS_ERROR") {
-      this.sendNotification("TTS_SAY_ERROR", payload);
-    }
   }
 });
