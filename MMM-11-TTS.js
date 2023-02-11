@@ -1,34 +1,30 @@
-Module.register("MMM-11-TTS", {
+Module.register("MMM-11-TTS",{
 
-    // Define module defaults
+    // Default config options
     defaults: {
         apiKey: "",
-        voiceId: "",
-        languageId: "en_us",
-        startUpText: "Welcome to MagicMirror"
+        voiceId: ""
     },
 
-    // Define required scripts
-    getScripts: function() {
-        return ["node_helper.js"];
+    // Override dom generator.
+    getDom: function() {
+        var wrapper = document.createElement("div");
+        return wrapper;
     },
 
-    // Define required styles
-    getStyles: function() {
-        return [];
-    },
-
-    // Define start function
+    // Start the module
     start: function() {
         Log.info("Starting module: " + this.name);
-        this.sendSocketNotification("TTS_PLAY", this.config.startUpText);
+        this.config = Object.assign({}, this.defaults, this.config);
+
+        this.sendSocketNotification("MMM-11-TTS_START", this.config);
     },
 
-    // Define notification handler
-    notificationReceived: function(notification, payload, sender) {
+    // Handle notifications
+    socketNotificationReceived: function(notification, payload) {
         if (notification === "SHOW_ALERT") {
-            Log.info("Notification received: " + notification);
-            this.sendSocketNotification("TTS_PLAY", payload);
+            var text = payload;
+            this.sendSocketNotification("MMM-11-TTS_TEXT", text);
         }
     }
 });
