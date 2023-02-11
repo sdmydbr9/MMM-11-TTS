@@ -31,6 +31,8 @@ module.exports = NodeHelper.create({
       })
     };
 
+    console.log("[MMM-11-TTS] Making API call for text: " + payload.text);
+
     request(options, function(error, apiResponse, body) {
       if (error) {
         console.log("[MMM-11-TTS] Error: " + error);
