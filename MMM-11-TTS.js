@@ -3,7 +3,8 @@ Module.register("MMM-11-TTS",{
     // Default config options
     defaults: {
         apiKey: "",
-        voiceId: ""
+        voiceId: "",
+        startUpMessage: "Starting MMM-11-TTS module"
     },
 
     // Override dom generator.
@@ -14,7 +15,7 @@ Module.register("MMM-11-TTS",{
 
     // Start the module
     start: function() {
-        Log.info("Starting module: " + this.name);
+        Log.info(this.config.startUpMessage);
         this.config = Object.assign({}, this.defaults, this.config);
 
         this.sendSocketNotification("MMM-11-TTS_START", this.config);
