@@ -1,21 +1,25 @@
-const NodeHelper = require("node_helper");
-const exec = require("child_process").exec;
+var exec = require("child_process").exec;
+var PythonShell = require("python-shell");
 
 module.exports = NodeHelper.create({
-    // Define socket notification handler
-    socketNotificationReceived: function(notification, payload) {
-        if (notification === "TTS_PLAY") {
-            this.playTTS(payload);
-        }
-    },
+  start: function() {
+    console.log("MMM-11-TTS helper started");
+  },
 
-    // Play TTS function
-    playTTS: function(payload) {
-        let apiKey = this.config.apiKey;
-        let voiceId = this.config.voiceId;
-        let languageId = this.config.languageId;
-        let text = payload.text;
+  socketNotificationReceived: function(notification, payload) {
+    if (notification === "SHOW_ALERT") {
+      var options = {
+        mode: "text",
+        pythonPath: "/usr/bin/python3",
+        pythonOptions: ["-u"],
+        scriptPath: "/home/pi/MagicMirror/modules/MMM-11-TTS",
+        args: [payload]
+      };
 
-        // Add code to call the TTS API here and play the generated audio
+      PythonShell.run("main.py", options, function(err, results) {
+        if (err) throw err;
+        console.log("results: %j", results);
+      });
     }
+  }
 });
