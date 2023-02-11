@@ -58,13 +58,27 @@ module.exports = NodeHelper.create({
         return;
       }
 
-      self.sendSocketNotification("TTS_FILE", {
-        uid: payload.uid,
-        file: filename,
-        type: "mp3"
-      });
+      exec("ffmpeg -i " + filename + " " + filename.replace(".mp3", ".wav"), function (error, stdout, stderr) {
+        if (error) {
+          console.log("[MMM-11-TTS] Error: " + error);
+          response("ERROR");
+          return;
+        }
 
-      response("OK");
+        self.sendSocketNotification("TTS_FILE", {
+          uid: payload.uid,
+          file: filename.replace(".mp3", ".wav"),
+          type: "wav"
+        });
+
+        fs.unlink(filename, function(error) {
+          if (error) {
+            console.log("[MMM-11-TTS] Error: " + error);
+            response("ERROR");
+            return;
+          }
+
+          response("OK");
     });
   }
 });
