@@ -7,8 +7,9 @@ module.exports = NodeHelper.create({
   },
 
   socketNotificationReceived: function(notification, payload) {
-    if (notification === "SHOW_ALERT") {
-      console.log("Received SHOW_ALERT notification with payload:", payload);
+    if (notification === "MMM-11-TTS_START") {
+      console.log("Received start notification for MMM-11-TTS module");
+      this.config = payload;
     } else if (notification === "MMM-11-TTS_TEXT") {
       console.log("Received text for TTS:", payload);
       this.runScript(payload, this.config.apiKey, this.config.voiceId);
