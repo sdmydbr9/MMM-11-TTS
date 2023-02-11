@@ -1,10 +1,10 @@
 {
   "name": "MMM-11-TTS",
-  "version": "1.0.0",
-  "description": "A Node.js module for 11-TTS",
-  "author": "sdmydbr",
+  "version": "0.0.1",
+  "description": "A text-to-speech module for MagicMirror",
+  "author": "Your Name",
   "dependencies": {
-    "request": "^2.88.2",
-    "node-helper": "^0.1.1"
+    "request": "2.88.0",
+    "subprocess": "0.0.3"
   }
 }
