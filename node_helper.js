@@ -6,15 +6,15 @@ module.exports = NodeHelper.create({
   },
 
   socketNotificationReceived: function(notification, payload) {
-    if (notification === "SHOW_ALERT") {
-      console.log(`Received notification: ${notification}`);
-      this.runScript(payload);
+    if (notification === "MMM-11-TTS_TEXT") {
+      console.log("Received text for TTS:", payload);
+      this.runScript(payload, this.config.apiKey, this.config.voiceId);
     }
   },
 
-  runScript: function(payload) {
-    console.log(`Running Python script with text: ${payload.text}`);
-    const process = spawn("python3", ["./main.py", payload.text, payload.voice_id, payload.api_key]);
+  runScript: function(text, apiKey, voiceId) {
+    console.log(`Running Python script with text: ${text}`);
+    const process = spawn("python3", ["./main.py", text, voiceId, apiKey]);
     process.stdout.on("data", data => {
       console.log(`Script output: ${data.toString()}`);
     });
