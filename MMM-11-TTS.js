@@ -23,8 +23,8 @@ Module.register("MMM-11-TTS",{
 
     // Handle notifications
     socketNotificationReceived: function(notification, payload) {
+        console.log("Received notification: ", notification);
         if (notification === "SHOW_ALERT") {
-            console.log("Mainjs received SHOW_ALERT notification");
             var text = payload.message;
             this.sendSocketNotification("MMM-11-TTS_TEXT", text);
         }
