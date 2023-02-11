@@ -5,6 +5,6 @@
   "author": "sdmydbr",
   "dependencies": {
     "request": "^2.88.2",
-    "node-helper": "^0.2.1"
+    "node-helper": "^0.1.1"
   }
 }
