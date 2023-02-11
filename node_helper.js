@@ -74,13 +74,14 @@ module.exports = NodeHelper.create({
         });
 
         fs.unlink(filename, function(error) {
-          if (error) {
-            console.log("[MMM-11-TTS] Error: " + error);
-            response("ERROR");
-            return;
-          }
+  if (error) {
+    console.log("[MMM-11-TTS] Error: " + error);
+    response("ERROR");
+    return;
+  }
 
-          response("OK");
-    });
+  response("OK");
+});
+
   }
 });
