@@ -34,6 +34,9 @@ Module.register("MMM-11-TTS", {
       this.sendNotification("TTS_SAY_ENDING", payload);
     } else if (notification == "TTS_ERROR") {
       this.sendNotification("TTS_SAY_ERROR", payload);
+    } else if (notification == "TTS_AUDIO_READY") {
+      var audioFile = payload;
+      aplay(`${audioFile}.wav`);
     }
   },
 
