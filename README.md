@@ -3,7 +3,8 @@ config file
 
 
 
-``` {
+``` 
+{
   module: "MMM-11-TTS",
   config: {
     useScreenReader: true,
