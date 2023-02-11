@@ -1,3 +1,4 @@
+const NodeHelper = require("node_helper");
 var exec = require("child_process").exec;
 var PythonShell = require("python-shell");
 
