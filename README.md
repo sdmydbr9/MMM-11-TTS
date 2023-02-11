@@ -9,8 +9,7 @@ config file
     position: 'top_left',
     config: {
         apiKey: 'your_api_key',
-        voiceId: 'your_voice_id',
-        languageId: 'your_language_id'
+        voiceId: 'your_voice_id'
     }
 },
 
