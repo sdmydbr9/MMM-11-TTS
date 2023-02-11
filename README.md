@@ -5,18 +5,13 @@ config file
 
 ``` 
 {
-  module: "MMM-11-TTS",
-  config: {
-    useScreenReader: true,
-    useNotification: true,
-    voice: "default",
-    ttsAPIKey: "",
-    ttsModelID: "21m00Tcm4TlvDq8ikWAM",
-    ttsLanguageID: "en-US",
-    welcome: {
-      enabled: true,
-      message: "Hello, welcome to your MagicMirror!"
+    module: 'MMM-11-TTS',
+    position: 'top_left',
+    config: {
+        apiKey: 'your_api_key',
+        voiceId: 'your_voice_id',
+        languageId: 'your_language_id'
     }
-  }
-}
+},
+
 ``` 
