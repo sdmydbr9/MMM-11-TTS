@@ -14,8 +14,8 @@ Module.register("MMM-11-TTS",{
 
     // Start the module
     start: function() {
-        Log.info(this.config.startUpMessage);
-        Log.info("Starting module: " + this.name);
+        console.log(this.config.startUpMessage);
+        console.log("Starting module: " + this.name);
         this.config = Object.assign({}, this.defaults, this.config);
 
         this.sendSocketNotification("MMM-11-TTS_START", this.config);
@@ -23,7 +23,7 @@ Module.register("MMM-11-TTS",{
 
     // Handle notifications
     socketNotificationReceived: function(notification, payload) {
-        console.log("Received notification: ", notification);
+        console.log("Received socket notification:", notification);
         if (notification === "SHOW_ALERT") {
             var text = payload.message;
             this.sendSocketNotification("MMM-11-TTS_TEXT", text);
