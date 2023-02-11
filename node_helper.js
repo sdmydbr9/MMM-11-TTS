@@ -49,6 +49,21 @@ module.exports = NodeHelper.create({
         response.send("ERROR")
         return
       }
+socketNotificationReceived: function(notification, payload) {
+    if (notification == "TTS_END") {
+        this.sendNotification("TTS_SAY_ENDING", payload);
+
+        // Play the audio as soon as it's received
+        var playCommand = "aplay " + payload;
+        exec(playCommand, function(error, stdout, stderr) {
+            if (error) {
+                console.error(error);
+            }
+        });
+    } else if (notification == "TTS_ERROR") {
+        this.sendNotification("TTS_SAY_ERROR", payload);
+    }
+},
 
       self.sendSocketNotification("TTS_FILE", {
         uid: payload.uid,
