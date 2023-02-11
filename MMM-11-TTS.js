@@ -1,56 +1,33 @@
 Module.register("MMM-11-TTS", {
-  defaults: {
-    useScreenReader: true,
-    useNotification: true,
-    voice: "default",
-    ttsAPIKey: "",
-    ttsModelID: "21m00Tcm4TlvDq8ikWAM",
-    ttsLanguageID: "en-US",
-    welcome: {
-      enabled: true,
-      message: "Hello, welcome to your MagicMirror!"
-    }
-  },
 
-  start: function() {
-    Log.info("Starting module: " + this.name);
-    this.sendSocketNotification("INIT", this.config);
-    if (this.config.welcome.enabled) {
-      this.sendSocketNotification("SAY", this.config.welcome.message);
-    }
-  },
+    // Define module defaults
+    defaults: {
+        apiKey: "",
+        voiceId: "",
+        languageId: "en_us",
+        text: "Hello World"
+    },
 
-  notificationReceived: function(notification, payload, sender) {
-    if (this.config.useNotification && notification == "TTS_SAY") {
-      this.sendSocketNotification("SAY", payload);
-    } else if (this.config.useScreenReader && notification == "SHOW_ALERT") {
-      var message = payload.message;
-      this.sendSocketNotification("READ", message);
-    }
-  },
+    // Define required scripts
+    getScripts: function() {
+        return ["node_helper.js"];
+    },
 
-  socketNotificationReceived: function(notification, payload) {
-    if (notification == "TTS_END") {
-      this.sendNotification("TTS_SAY_ENDING", payload);
-    } else if (notification == "TTS_ERROR") {
-      this.sendNotification("TTS_SAY_ERROR", payload);
-    } else if (notification == "TTS_AUDIO_READY") {
-      var audioFile = payload;
-      aplay(`${audioFile}.wav`);
-    }
-  },
+    // Define required styles
+    getStyles: function() {
+        return [];
+    },
 
-  notificationTrigger: {
-    "TEST_TTS": "Test TTS notification is coming",
-    "SHOW_ALERT": (payload, sender) => {
-      return payload.message;
-    }
-  },
+    // Define start function
+    start: function() {
+        Log.info("Starting module: " + this.name);
+    },
 
-  notifications: {
-    TTS_SAY: "TTS_SAY",
-    TTS_SAY_STARTING: "TTS_SAY_STARTING",
-    TTS_SAY_ENDING: "TTS_SAY_ENDING",
-    TTS_SAY_ERROR: "TTS_SAY_ERROR"
-  }
+    // Define notification handler
+    notificationReceived: function(notification, payload, sender) {
+        if (notification === "SHOW_ALERT") {
+            Log.info("Notification received: " + notification);
+            this.sendSocketNotification("TTS_PLAY", payload);
+        }
+    }
 });
