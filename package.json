@@ -1,0 +1,10 @@
+{
+  "name": "MMM-11-TTS",
+  "version": "1.0.0",
+  "description": "A Node.js module for 11-TTS",
+  "author": "sdmydbr",
+  "dependencies": {
+    "request": "^2.88.2",
+    "node-helper": "^0.2.1"
+  }
+}
