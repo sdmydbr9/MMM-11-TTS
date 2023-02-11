@@ -25,6 +25,7 @@ class MMM_11_TTS:
         response = requests.post(self.url, headers=self.headers, json=data)
 
         if response.status_code == 200:
+            print("MMM-11-TTS: API call was successful")
             with open("hello_world.mp3", "wb") as f:
                 f.write(response.content)
                 print("MMM-11-TTS: Audio generated and saved to hello_world.mp3")
