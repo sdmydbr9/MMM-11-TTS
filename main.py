@@ -12,8 +12,10 @@ class MMM_11_TTS:
             "xi-api-key": self.api_key,
             "Content-Type": "application/json",
         }
+        print("MMM-11-TTS: Initialization complete")
 
     def play_tts(self, text):
+        print("MMM-11-TTS: API call initiated")
         data = {
             "text": text,
             "model_id": "prod",
@@ -25,13 +27,13 @@ class MMM_11_TTS:
         if response.status_code == 200:
             with open("hello_world.mp3", "wb") as f:
                 f.write(response.content)
-                print("Audio generated and saved to hello_world.mp3")
+                print("MMM-11-TTS: Audio generated and saved to hello_world.mp3")
                 subprocess.call(['ffmpeg', '-i', 'hello_world.mp3', 'hello_world.wav'])
-                print("Audio converted to wav format and saved as hello_world.wav")
+                print("MMM-11-TTS: Audio converted to wav format and saved as hello_world.wav")
                 subprocess.call(['aplay', 'hello_world.wav'])
-                print("Audio playing...")
+                print("MMM-11-TTS: Audio playing...")
                 subprocess.call(['rm', 'hello_world.mp3'])
                 subprocess.call(['rm', 'hello_world.wav'])
-                print("Files deleted.")
+                print("MMM-11-TTS: Files deleted.")
         else:
-            print("Request failed with status code:", response.status_code)
+            print("MMM-11-TTS: Request failed with status code:", response.status_code)
