@@ -4,8 +4,7 @@ Module.register("MMM-11-TTS", {
     defaults: {
         apiKey: "",
         voiceId: "",
-        languageId: "en_us",
-        text: "Hello World"
+        languageId: "en_us"
     },
 
     // Define required scripts
