@@ -50,38 +50,36 @@ module.exports = NodeHelper.create({
   },
 
   playTTS: function(payload, response, buffer) {
-    var filename = this.path + "/tmp/" + payload.uid + ".mp3";
-    var self = this;
+  var filename = this.path + "/tmp/" + payload.uid + ".mp3";
+  var self = this;
 
-    fs.writeFile(filename, buffer, function(error) {
+  fs.writeFile(filename, buffer, function(error) {
+    if (error) {
+      console.log("[MMM-11-TTS] Error: " + error);
+      response("ERROR");
+      return;
+    }
+
+    exec("ffmpeg -i " + filename + " " + filename.replace(".mp3", ".wav"), function (error, stdout, stderr) {
       if (error) {
         console.log("[MMM-11-TTS] Error: " + error);
         response("ERROR");
         return;
       }
 
-      exec("ffmpeg -i " + filename + " " + filename.replace(".mp3", ".wav"), function (error, stdout, stderr) {
+      self.sendSocketNotification("TTS_FILE", {
+        uid: payload.uid,
+        file: filename.replace(".mp3", ".wav"),
+        type: "wav"
+      });
+
+      response("OK");
+
+      fs.unlink(filename.replace(".mp3", ".wav"), function(error) {
         if (error) {
-          console.log("[MMM-11-TTS] Error: " + error);
-          response("ERROR");
-          return;
+          console.log("[MMM-11-TTS] Error deleting file: " + error);
         }
-
-        self.sendSocketNotification("TTS_FILE", {
-          uid: payload.uid,
-          file: filename.replace(".mp3", ".wav"),
-          type: "wav"
-        });
-
-        fs.unlink(filename, function(error) {
-  if (error) {
-    console.log("[MMM-11-TTS] Error: " + error);
-    response("ERROR");
-    return;
-  }
-
-  response("OK");
-});
-
-  }
-});
+      });
+    });
+  });
+}
