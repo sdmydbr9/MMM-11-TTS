@@ -8,7 +8,7 @@ module.exports = NodeHelper.create({
   },
 
   socketNotificationReceived: function(notification, payload) {
-    if (notification === "SHOW_ALERT") {
+    if (notification === "TTS_PLAY") {
       var options = {
         mode: "text",
         pythonPath: "/usr/bin/python3",
@@ -19,7 +19,7 @@ module.exports = NodeHelper.create({
 
       PythonShell.run("main.py", options, function(err, results) {
         if (err) throw err;
-        console.log("results: %j", results);
+        console.log("MMM-11-TTS: API call successful");
       });
     }
   }
