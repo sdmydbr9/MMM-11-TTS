@@ -4,7 +4,8 @@ Module.register("MMM-11-TTS", {
     defaults: {
         apiKey: "",
         voiceId: "",
-        languageId: "en_us"
+        languageId: "en_us",
+        startUpText: "Welcome to MagicMirror"
     },
 
     // Define required scripts
@@ -20,6 +21,7 @@ Module.register("MMM-11-TTS", {
     // Define start function
     start: function() {
         Log.info("Starting module: " + this.name);
+        this.sendSocketNotification("TTS_PLAY", this.config.startUpText);
     },
 
     // Define notification handler
