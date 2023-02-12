@@ -1,13 +1,15 @@
 import argparse
 import requests
 import subprocess
-import configparser
 
-def execute_script(text, api_key, voice_id):
-    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+API_KEY = "your api"
+VOICE_ID = "voice id"
+
+def execute_script(text):
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}"
     headers = {
         "accept": "audio/mpeg",
-        "xi-api-key": api_key,
+        "xi-api-key": API_KEY,
         "Content-Type": "application/json",
     }
 
@@ -38,9 +40,4 @@ if __name__ == '__main__':
     parser.add_argument('text', help='Text to be synthesized')
     args = parser.parse_args()
 
-    config = configparser.ConfigParser()
-    config.read('config.ini')
-    api_key = config.get('credentials', 'api_key')
-    voice_id = config.get('credentials', 'voice_id')
-
-    execute_script(args.text, api_key, voice_id)
+    execute_script(args.text)
