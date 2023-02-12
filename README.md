@@ -1,4 +1,7 @@
 # MMM-11-TTS
+this module id dependent on MMM-Notification-Trigger module 
+after cloning the modules, add the following lines
+
 config file
 
 
