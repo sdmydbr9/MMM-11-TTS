@@ -2,8 +2,8 @@ import argparse
 import requests
 import subprocess
 
-API_KEY = "your api"
-VOICE_ID = "voice id"
+API_KEY = "your api" #get it from your profile tab in eleven labs
+VOICE_ID = "voice id" #get it frpm https://api.elevenlabs.io/v1/voices
 
 def execute_script(text):
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}"
