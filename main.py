@@ -32,18 +32,11 @@ def execute_script(text, api_key, voice_id):
     else:
         print("Request failed with status code:", response.status_code)
 
-def main():
+if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("text", type=str, help="Text to be synthesized")
-    parser.add_argument("api_key", type=str, help="API key for the text-to-speech service")
-    parser.add_argument("voice_id", type=str, help="ID of the voice to be used for synthesis")
-
+    parser.add_argument('text', help='Text to be synthesized')
+    parser.add_argument('api_key', help='API key for the text-to-speech service')
+    parser.add_argument('voice_id', help='Voice ID for the text-to-speech service')
     args = parser.parse_args()
-    text = args.text
-    api_key = args.api_key
-    voice_id = args.voice_id
 
-    execute_script(text, api_key, voice_id)
-
-if __name__ == "__main__":
-    main()
+    execute_script(args.text, args.api_key, args.voice_id)
