@@ -4,8 +4,8 @@ import subprocess
 
 parser = argparse.ArgumentParser()
 parser.add_argument("text", help="The text to be synthesized")
-parser.add_argument("voice_id", help="The voice ID")
 parser.add_argument("api_key", help="The API key")
+parser.add_argument("voice_id", help="The voice ID")
 args = parser.parse_args()
 
 url = f"https://api.elevenlabs.io/v1/text-to-speech/{args.voice_id}"
