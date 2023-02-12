@@ -1,4 +1,7 @@
-
+first install the MMM-NotificationTrigger module
+clone this module
+edit the config.ini with you credentials 
+edit the comfig and add the following lines
 
 config file
 
