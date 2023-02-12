@@ -16,10 +16,10 @@ Module.register("MMM-11-TTS", {
         return wrapper;
     },
 
-    notificationReceived: function(notification, payload) {
+    notificationReceived: function(notification, payload, sender) {
         if (notification === 'SHOW_ALERT') {
-            console.log(`Received notification: ${notification}`);
-            console.log(`Payload: ${payload}`);
+            console.log(`Received notification: ${notification} from ${sender.name}`);
+            console.log(`Payload: ${JSON.stringify(payload)}`);
         }
     }
 });
