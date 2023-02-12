@@ -20,7 +20,7 @@ module.exports = NodeHelper.create({
 
   runScript: function(text, apiKey, voiceId) {
     console.log(`Running Python script with text: ${text}`);
-    const process = spawn("python3", ["./main.py", text, voiceId, apiKey]);
+    const process = spawn("python3", ["/home/pi/MagicMirror/modules/MMM-11-TTS/main.py", text, voiceId, apiKey]);
     process.stdout.on("data", data => {
       console.log(`Script output: ${data.toString()}`);
     });
