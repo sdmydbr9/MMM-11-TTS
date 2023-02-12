@@ -1,4 +1,6 @@
-first install the MMM-NotificationTrigger module
+This module adds text to speech functionality with the api from 11 labs. 
+
+First install the MMM-NotificationTrigger module
 clone this module
 edit the config.ini with you credentials 
 edit the comfig and add the following lines
