@@ -5,12 +5,30 @@ config file
 
 ``` 
 {
-    module: 'MMM-11-TTS',
-    position: 'top_left',
-    config: {
-        apiKey: 'your_api_key',
-        voiceId: 'your_voice_id'
-    }
-},
+      module: "MMM-NotificationTrigger",
+      config: {
+        useWebhook:true,
+        triggers:[
+          {
+            trigger: "SHOW_ALERT",
+            fires: [
+              {
+                fire: "python3",
+                payload: function(payload) {
+                  return {
+                    command: `python3 /home/pi/MagicMirror/modules/MMM-11-TTS/main.py "${payload.message}" ${apiKey} ${voiceId}`,
+                    env: {
+                      apiKey: '',
+                      voiceId: ''
+                    }
+                  }
+                },
+              },
+            ],
+          },
+	],
+      }
+ }
+
 
 ``` 
