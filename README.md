@@ -13,7 +13,7 @@ pip3 install -r requirements.txt
 edit the config.ini with you credentials 
 
 
-edit the config and add the following lines
+edit the config.js and add the following lines
 
 config file
 
