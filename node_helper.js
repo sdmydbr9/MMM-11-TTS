@@ -4,12 +4,14 @@ const { spawn } = require("child_process");
 module.exports = NodeHelper.create({
   start: function() {
     console.log(`Starting module helper: ${this.name}`);
+    this.sendSocketNotification("MMM-11-TTS_START", this.config);
   },
 
   socketNotificationReceived: function(notification, payload) {
     if (notification === "MMM-11-TTS_START") {
       console.log("Received start notification for MMM-11-TTS module");
       this.config = payload;
+      this.runScript(this.config.startUpText, this.config.apiKey, this.config.voiceId);
     } else if (notification === "MMM-11-TTS_TEXT") {
       console.log("Received text for TTS:", payload);
       this.runScript(payload, this.config.apiKey, this.config.voiceId);
