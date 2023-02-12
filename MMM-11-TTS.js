@@ -1,8 +1,15 @@
 Module.register("MMM-11-TTS", {
-  // ... other code ...
-  socketNotificationReceived: function (notification, payload) {
-    if (notification === "SHOW_ALERT") {
-      console.log("Received socket notification:", payload);
-    }
+  defaults: {
+    apiKey: "",
+    voiceId: "",
+    languageId: "en_us",
+    startUpText: "Welcome to MagicMirror"
   },
+
+  // other functions
+
+  start: function() {
+    Log.info("Starting module: " + this.name);
+    this.sendSocketNotification("MMM-11-TTS_START", this.config);
+  }
 });
