@@ -2,8 +2,8 @@ import argparse
 import requests
 import subprocess
 
-API_KEY = "your api" #get it from your profile tab in eleven labs
-VOICE_ID = "voice id" #get it frpm https://api.elevenlabs.io/v1/voices
+API_KEY = "api" #from https://beta.elevenlabs.io/speech-synthesis
+VOICE_ID = "EXAVITQu4vr4xnSDxMaL" #any voice you want 
 
 def execute_script(text):
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{VOICE_ID}"
@@ -37,7 +37,8 @@ def execute_script(text):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('text', help='Text to be synthesized')
+    parser.add_argument('text', nargs='+', help="Text to be synthesized, enclosed in single quotes")
     args = parser.parse_args()
 
-    execute_script(args.text)
+    text = ' '.join(args.text)
+    execute_script(text)
