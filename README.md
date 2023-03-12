@@ -2,7 +2,7 @@ This module adds text to speech functionality with the api from 11 labs.
 
 First install the MMM-NotificationTrigger module
 
-
+## You need to have fmpeg installed for this to work.
 
 
 1. clone this module
