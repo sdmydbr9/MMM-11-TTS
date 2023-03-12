@@ -4,8 +4,6 @@ First install the MMM-NotificationTrigger module
 
 
 
-## Edit main.py and add your api keys from eleven labs
-
 
 1. clone this module
 
@@ -13,8 +11,7 @@ First install the MMM-NotificationTrigger module
 ```
 pip3 install -r requirements.txt
 ```
-
-edit the config.ini with you credentials 
+## Edit main.py and add your api keys from eleven labs
 
 
 edit the config.js and add the following lines
