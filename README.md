@@ -17,10 +17,10 @@ test your installation by running
 
   
 ```
-python3 main.py "hello world"
+python3 main.py "hello world" 
   
 ```
-
+If you are getting the voice output, your installation was successful
 
 edit the config.js and add the following lines
 
