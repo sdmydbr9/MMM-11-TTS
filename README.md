@@ -13,6 +13,14 @@ pip3 install -r requirements.txt
 ```
 ## Edit main.py and add your api keys from eleven labs in line 5
 
+test your installation by running 
+
+  
+```
+python3 main.py "hello world"
+  
+```
+
 
 edit the config.js and add the following lines
 
