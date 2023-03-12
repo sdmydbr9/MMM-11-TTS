@@ -2,12 +2,14 @@ This module adds text to speech functionality with the api from 11 labs.
 
 First install the MMM-NotificationTrigger module
 
+
+
 ## Edit main.py and add your api keys from eleven labs
 
 
-clone this module
+1. clone this module
 
-Run 
+2. Run 
 ```
 pip3 install -r requirements.txt
 ```
