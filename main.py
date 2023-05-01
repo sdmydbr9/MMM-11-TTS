@@ -15,7 +15,7 @@ def execute_script(text):
 
     data = {
         "text": text,
-        "model_id": "prod",
+        "model_id": "eleven_monolingual_v1",
         "language_id": "en_us"
     }
 
